@@ -1,0 +1,6 @@
+{
+    "parent": "bidd:block/fancy_bed_foot",
+    "textures": {
+       "0": "bidd:blocks/fancy_bed_foot_green"
+    }
+}
