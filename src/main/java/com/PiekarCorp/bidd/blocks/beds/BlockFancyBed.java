@@ -3,6 +3,7 @@ package com.PiekarCorp.bidd.blocks.beds;
 
 import java.util.Random;
 
+
 import javax.annotation.Nullable;
 
 import com.PiekarCorp.bidd.init.ModBlocks;
@@ -11,6 +12,7 @@ import com.PiekarCorp.bidd.items.ItemFancyBed;
 import com.PiekarCorp.bidd.tileentity.TileEntityFancyBed;
 
 import net.minecraft.block.BlockBed;
+import net.minecraft.block.BlockColored;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -20,15 +22,18 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBed;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityBed;
 import net.minecraft.util.BlockRenderLayer;
@@ -45,20 +50,26 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.block.properties.PropertyEnum;
 
 
 public class BlockFancyBed extends BlockBed{
 	
-	public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.<EnumDyeColor>create("color", EnumDyeColor.class);
+	public static final IProperty<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 	
 	public BlockFancyBed(String name) 
 	{
 		setUnlocalizedName(name);
 		this.setHardness(1);
 		setRegistryName(name);
-        this.hasTileEntity = true;
-		ModBlocks.BLOCKS.add(this);
+		ModBlocks.BLOCKS.add(this);	
 	} 
+	
+	@Override
+	public boolean hasTileEntity(IBlockState state) {
+		return true;
+	}
+	
 	
 	@Override
 	 public boolean isBed(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity player)
@@ -138,6 +149,7 @@ public class BlockFancyBed extends BlockBed{
 
                 if (entityplayer$sleepresult == EntityPlayer.SleepResult.OK)
                 {
+                	playerIn.heal(20);
                     state = state.withProperty(OCCUPIED, Boolean.valueOf(true));
                     worldIn.setBlockState(pos, state, 4);
                     return true;
@@ -190,6 +202,7 @@ public class BlockFancyBed extends BlockBed{
         
 
         return null;
+       
     }
    
 
@@ -198,7 +211,7 @@ public class BlockFancyBed extends BlockBed{
         protected BlockStateContainer createBlockState()
         {
            // return new BlockStateContainer(this, new IProperty[] {FACING, PART, OCCUPIED});
-    		 return new BlockStateContainer.Builder(this).add(FACING, PART, OCCUPIED).add(COLOR).build();
+    		 return new BlockStateContainer(this, FACING, PART, OCCUPIED, COLOR) ;
 
         }
     	
@@ -229,21 +242,22 @@ public class BlockFancyBed extends BlockBed{
             }
         }
         
-        public EnumDyeColor loadColor(World worldIn, BlockPos pos)
+        public EnumDyeColor loadColor(IBlockAccess worldIn, BlockPos pos)
         {
         	TileEntity tileentity = worldIn.getTileEntity(pos);
         	if(tileentity instanceof TileEntityFancyBed) {
         		TileEntityFancyBed bed = (TileEntityFancyBed) tileentity;
+        	
         		return bed.getColor();
         	}     		
         	return EnumDyeColor.RED;
         }
         
+           @SuppressWarnings("deprecation")
     	   @Override
     	    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     	    {
-    	            IBlockState iblockstate = worldIn.getBlockState(pos);
-    	            state = state.withProperty(OCCUPIED, iblockstate.getValue(OCCUPIED)).withProperty(COLOR , loadColor((World)worldIn, pos));
+    	            state = state.withProperty(COLOR , loadColor(worldIn, pos));
     	            return state;
     	    }
     	   
@@ -273,7 +287,7 @@ public class BlockFancyBed extends BlockBed{
     	        EnumDyeColor enumdyecolor = te.getColor();
     	        return new ItemStack(ModItems.ITEM_FANCY_BED, 1, enumdyecolor.getMetadata());
     	    }
-    	   
+    	      	   
     	   @SideOnly(Side.CLIENT)
     	    public static boolean isHeadPiece(int metadata)
     	    {
@@ -284,10 +298,9 @@ public class BlockFancyBed extends BlockBed{
     	    @SideOnly(Side.CLIENT)
     	    public BlockRenderLayer getBlockLayer()
     	    {
-    	        return BlockRenderLayer.CUTOUT_MIPPED;
+    	        return BlockRenderLayer.CUTOUT;
     	    }
     	   
-
-    	    
+    	   
     	   
 }
