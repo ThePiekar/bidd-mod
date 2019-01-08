@@ -132,6 +132,8 @@ public class ItemFancyBed extends ItemBed implements IHasModel {
         return super.getUnlocalizedName() + "_" + EnumDyeColor.byMetadata(stack.getMetadata()).getUnlocalizedName();
     }
 	
+	
+	
 	private static void registerMetaRender(Item item, int meta, String file){
 		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(Reference.MOD_ID + ":" + file));
 	}
