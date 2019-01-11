@@ -41,7 +41,7 @@ public class ItemFancyBed extends ItemBed implements IHasModel {
 	{
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(CreativeTabs.MISC);
+		setCreativeTab(Main.BIDDTAB);
 		ModItems.ITEMS.add(this);
 	}
 	 

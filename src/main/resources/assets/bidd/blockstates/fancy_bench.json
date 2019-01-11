@@ -1,0 +1,33 @@
+{
+    "variants": {
+    "facing=north,front=false,left=false,right=false": { "model": "bidd:corner_seat_alone", "y": 180},
+	"facing=south,front=false,left=false,right=false": { "model": "bidd:corner_seat_alone"},
+	"facing=east,front=false,left=false,right=false": { "model": "bidd:corner_seat_alone", "y": 270},
+	"facing=west,front=false,left=false,right=false": { "model": "bidd:corner_seat_alone", "y": 90},
+	
+	"facing=north,front=false,left=true,right=false": { "model": "bidd:corner_seat_left", "y": 180},
+	"facing=south,front=false,left=true,right=false": { "model": "bidd:corner_seat_left"},
+	"facing=east,front=false,left=true,right=false": { "model": "bidd:corner_seat_left", "y": 270},
+	"facing=west,front=false,left=true,right=false": { "model": "bidd:corner_seat_left", "y": 90},
+	
+	"facing=north,front=false,left=false,right=true": { "model": "bidd:corner_seat_right", "y": 180},
+	"facing=south,front=false,left=false,right=true": { "model": "bidd:corner_seat_right"},
+	"facing=east,front=false,left=false,right=true": { "model": "bidd:corner_seat_right", "y": 270},
+	"facing=west,front=false,left=false,right=true": { "model": "bidd:corner_seat_right", "y": 90},
+	
+	"facing=north,front=false,left=true,right=true": { "model": "bidd:corner_seat_normal", "y": 180},
+	"facing=south,front=false,left=true,right=true": { "model": "bidd:corner_seat_normal"},
+	"facing=east,front=false,left=true,right=true": { "model": "bidd:corner_seat_normal", "y": 270},
+	"facing=west,front=false,left=true,right=true": { "model": "bidd:corner_seat_normal", "y": 90},
+	
+	"facing=north,front=true,left=false,right=true": { "model": "bidd:corner_seat_corner", "y": 180},
+	"facing=south,front=true,left=false,right=true": { "model": "bidd:corner_seat_corner"},
+	"facing=east,front=true,left=false,right=true": { "model": "bidd:corner_seat_corner", "y": 270},
+	"facing=west,front=true,left=false,right=true": { "model": "bidd:corner_seat_corner", "y": 90},
+	
+	"facing=north,front=true,left=true,right=false": { "model": "bidd:corner_seat_corner", "y": 90},
+	"facing=south,front=true,left=true,right=false": { "model": "bidd:corner_seat_corner", "y": 270},
+	"facing=east,front=true,left=true,right=false": { "model": "bidd:corner_seat_corner", "y": 180},
+	"facing=west,front=true,left=true,right=false": { "model": "bidd:corner_seat_corner"}
+    }
+}

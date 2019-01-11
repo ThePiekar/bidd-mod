@@ -14,3 +14,7 @@ item.item_fancy_bed_brown.name=Brown Fancy Bed
 item.item_fancy_bed_green.name=Green Fancy Bed
 item.item_fancy_bed_red.name=Red Fancy Bed
 item.item_fancy_bed_black.name=Black Fancy Bed
+
+tile.fancy_bench.name=Corner Seat
+
+itemGroup.biddtab=Back in the Day Deco

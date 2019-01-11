@@ -201,8 +201,7 @@ public class BlockFancyBed extends BlockBed{
         
         
 
-        return null;
-       
+        return null;   
     }
    
 
